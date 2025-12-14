@@ -48,9 +48,14 @@ Section du code exécutable contenant fonctions, étiquettes et instructions.
 Lecture/Exécution, non modifiable.
 
 Exemples : fonctions, labels, instructions diverses.
-
+\
+\
+\
+\
+\
+\
+\
 = Schéma ASM pur
-
 === ASM pur (sans libc)
 
 #raw("
@@ -105,6 +110,9 @@ adresses basses ↑ adresses hautes
 
 C : runtime libc + crt0 initialisent stack/heap.
 Plus de sections (GOT, PLT) pour les appels dynamiques.
+\
+\
+\
 
 = REGISTRES CPU
 
@@ -173,6 +181,7 @@ mov rax, 789
 sub rax, 1337   ; rax = -548
 ```
 
+\
 === DIV
 Division.
 

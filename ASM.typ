@@ -149,6 +149,45 @@ DW : define word (2 octets)
 
 DD : define double word (4 octets)
 
+
+== RES(X) --> RESERVED
+
+RESB : Reserved 1 byte (1 octet == 8 bits)
+
+ex:
+```asm
+section .bss
+    example resb 25         ;Syntaxe basique
+    example times 25 resb 1 ;Syntaxe differente ( en gros on dit de repeter 25 fois cette instruction):
+```
+
+RESW : Reserved 2 bytes (word) (2 octets == 16 bits)
+
+RESD : Reserved 4 bytes (double word) (4 octets == 32 bits)
+
+RESQ : Reserved 8 bytes (quadruple word) (8 octets == 64 bits)
+
+== EQU (equal)
+
+Directive qui sert a definir une constante
+
+ex:
+```asm
+section .data
+    msg db "voici une chaine" , 10 <= (char '\n')
+    MSG_LENGTH equ $-msg
+    STD_OUTPUT equ 1
+    TRUE equ 1
+```
+
+
+== ECRITURE SELON LA BASE
+
+d ou t :decimal ---> 5, 05, 0150d, 0d150
+q ou o :octal   ---> 755q, 0q755
+b ou y :binaire ---> 0b110111101 , 0b1101_1101, 1101_1100b
+h ou x :hexa    ---> 0xA5 , 0A5h
+
 == Étiquettes
 Permettent de créer des points de saut (jmp).
 
@@ -268,3 +307,5 @@ ex :
 ```asm
 jne   ; jump if not equal
 ```
+
+

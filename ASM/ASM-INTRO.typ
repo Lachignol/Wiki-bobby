@@ -138,6 +138,33 @@ ex :
 ```asm
 mov rax, 45
 ```
+
+== MOVSX
+Transfère une valeur dans un registre en complétant les bits de poids fort avec le bit de signe (extension de signe) pour préserver la valeur signée.
+- mov <destination> , <source>
+
+ex :
+```asm
+mov al, 0xFB      ; 11111011 = -5 (signé)
+movsx rax, al     ; rax = 1111...11111011 = -5 ✓ CORRECT
+```
+
+== MOVZX
+Transfère une valeur dans un registre en complétant les bits de poids fort avec des zéros (extension zéro) pour valeurs non-signées.
+- mov <destination> , <source>
+
+Extension zéro (valeurs NON signées):
+```asm
+mov al, 0xFB      ; 11111011 = 251 (non signé)
+movzx rax, al     ; rax = 0000...000000FB = +251 ✓ CORRECT
+```
+
+Extension zéro (valeurs signées):
+```asm
+mov al, 'a' - 'b'  ; al = 0xFF = 11111111 = -1 (signé)
+movzx rax, al      ; rax = 0000...000000FF = +255 ❌ FAUX on a pas -1 !
+```
+
 == SYSCALL
 Appel au kernel. Différent selon architecture (ELF32/64, PE32/64).
 

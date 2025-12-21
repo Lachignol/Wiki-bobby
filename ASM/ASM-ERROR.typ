@@ -1,8 +1,13 @@
 = Fonctionement des erreurs
 
+\
+\
+\
+
 
 ```asm
-syscall                     ;je fait mon syscall qui peu retourner une erreur exemple read 
+
+syscall                     ;je fait mon syscall qui peu retourner une erreur ex:read 
 test rax, rax               ;je fait un test pour mettre a jour les flag
 js error                    ;js = Jump if Sign → “saute si signe négatif”.
 ret
@@ -14,4 +19,5 @@ error:
     mov [rax], r8d          ;je copie donc le code err a l'endroit pointe par errno'
     mov rax, -1             ;je retourne -1 comme retour de la fonction
     ret
+
 ```

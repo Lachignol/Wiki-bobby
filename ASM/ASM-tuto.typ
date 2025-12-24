@@ -131,8 +131,8 @@ addq %rbx, %rax
   inset: 5pt,
   fill: (col, row) => if row == 0 { luma(230) } else { white },
   [*Registre*], [*Description*],
-  [**RIP**], [Instruction Pointer (pointeur d'instruction)],
-  [**RFLAGS**], [Registre de flags (ZF, CF, SF, OF, etc.)],
+  [*RIP*], [Instruction Pointer (pointeur d'instruction)],
+  [*RFLAGS*], [Registre de flags (ZF, CF, SF, OF, etc.)],
 )
 
 == 2.4 Flags principaux
@@ -198,7 +198,7 @@ mov rax, [rbx + rcx * 4]     ; base + index * échelle
 mov rax, [rbx + rcx * 8 + 16] ; base + index * échelle + déplacement
 ", lang: "nasm"))
 
-**Format général :**
+*Format général :*
 ```
 [base + index * scale + displacement]
 
@@ -230,7 +230,7 @@ mov [rax], rbx        ; Registre vers mémoire
 mov qword [rax], 42   ; Immédiat vers mémoire (avec taille)
 ", lang: "nasm"))
 
-**Tailles :**
+*Tailles :*
 #codebox(raw("
 mov al, 0x12          ; 8 bits
 mov ax, 0x1234        ; 16 bits
@@ -481,7 +481,7 @@ rep movsb             ; Copie rcx octets
 
 == 5.1 Qu'est-ce que l'ABI ?
 
-L'**ABI (Application Binary Interface)** définit :
+L'*ABI (Application Binary Interface)* définit :
 - Comment passer les arguments aux fonctions
 - Quels registres préserver
 - Comment retourner les valeurs
@@ -492,7 +492,7 @@ L'**ABI (Application Binary Interface)** définit :
 
 #diagram(raw("
 ┌─────────────────────────────────────────────────┐
-│  Ordre de passage des arguments (entiers/ptrs) │
+│  Ordre de passage des arguments (entiers/ptrs)  │
 ├─────────┬───────────────────────────────────────┤
 │ Arg 1   │ RDI                                   │
 │ Arg 2   │ RSI                                   │
@@ -504,7 +504,7 @@ L'**ABI (Application Binary Interface)** définit :
 └─────────┴───────────────────────────────────────┘
 "))
 
-**Pour les flottants (XMM0-XMM7) :**
+*Pour les flottants (XMM0-XMM7) :*
 ```
 XMM0 : 1er argument flottant
 XMM1 : 2ème argument flottant
@@ -519,19 +519,19 @@ XMM7 : 8ème argument flottant
 │             Registres PRÉSERVÉS                 │
 │  (la fonction appelée doit les sauvegarder)     │
 ├─────────────────────────────────────────────────┤
-│ RBX, RBP, R12, R13, R14, R15                   │
+│ RBX, RBP, R12, R13, R14, R15                    │
 └─────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────┐
 │             Registres VOLATILES                 │
 │  (peuvent être modifiés par l'appelé)           │
 ├─────────────────────────────────────────────────┤
-│ RAX, RCX, RDX, RSI, RDI, R8-R11                │
+│ RAX, RCX, RDX, RSI, RDI, R8-R11                 │
 │ XMM0-XMM15, RFLAGS                              │
 └─────────────────────────────────────────────────┘
 "))
 
-**Règle importante :** Si votre fonction utilise des registres préservés, vous **devez** les sauvegarder au début et les restaurer avant de retourner.
+*Règle importante :* Si votre fonction utilise des registres préservés, vous *devez* les sauvegarder au début et les restaurer avant de retourner.
 
 == 5.4 Valeurs de retour
 
@@ -564,13 +564,13 @@ XMM1   : Partie haute pour retour 128 bits
 
 RSP -> ┌───────────────┐
        │               │
-       │  Red Zone     │  128 octets utilisables
-       │  (optionnel)  │  sans modifier RSP
+                               │  Red Zone     │  128 octets utilisables
+                          │  (optionnel)  │  sans modifier RSP
        │               │
        └───────────────┘
 "))
 
-**Exemple :**
+*Exemple :*
 #codebox(raw("
 ; Fonction leaf utilisant la red zone
 my_leaf_function:
@@ -591,21 +591,21 @@ my_leaf_function:
 Mémoire haute (adresses élevées)
     ↓
     ├──────────────────┐
-    │   Arguments 7+   │  (si plus de 6 arguments)
+                              │   Arguments 7+   │  (si plus de 6 arguments)
     ├──────────────────┤
-    │  Adresse retour  │  (push par CALL)
-    ├──────────────────┤ <- RSP à l'entrée de la fonction
-    │   RBP sauvegardé │  (optionnel, pour frame pointer)
-    ├──────────────────┤ <- RBP (si utilisé)
+                     │  Adresse retour  │  (push par CALL)
+                                     ├──────────────────┤ <- RSP à l'entrée de la fonction
+                                     │   RBP sauvegardé │  (optionnel, pour frame pointer)
+                        ├──────────────────┤ <- RBP (si utilisé)
     │  Registres       │
     │  préservés       │
     ├──────────────────┤
     │  Variables       │
     │  locales         │
     ├──────────────────┤
-    │  Alignement      │  (padding si nécessaire)
-    ├──────────────────┤ <- RSP durant l'exécution
-    │  Red Zone        │  (optionnel, 128 octets)
+                             │  Alignement      │  (padding si nécessaire)
+                              ├──────────────────┤ <- RSP durant l'exécution
+                             │  Red Zone        │  (optionnel, 128 octets)
     └──────────────────┘
     ↓
 Mémoire basse (adresses faibles)
@@ -613,25 +613,25 @@ Mémoire basse (adresses faibles)
 
 == 6.2 Alignement de la pile : RÈGLE ESSENTIELLE
 
-**La pile DOIT être alignée sur 16 octets avant un CALL.**
+*La pile DOIT être alignée sur 16 octets avant un CALL.*
 
 #diagram(raw("
 ┌─────────────────────────────────────────────────┐
 │       RÈGLE D'ALIGNEMENT CRITIQUE               │
 ├─────────────────────────────────────────────────┤
-│ Avant CALL : RSP ≡ 0 (mod 16)                  │
-│ Après CALL : RSP ≡ 8 (mod 16)                  │
+│ Avant CALL : RSP ≡ 0 (mod 16)                   │
+│ Après CALL : RSP ≡ 8 (mod 16)                   │
 │               (car CALL empile 8 octets)        │
 │                                                 │
-│ Dans la fonction : RSP ≡ 8 (mod 16) au début   │
+│ Dans la fonction : RSP ≡ 8 (mod 16) au début    │
 └─────────────────────────────────────────────────┘
 "))
 
 == 6.3 Pourquoi l'alignement est important ?
 
-1. **Instructions SSE** : Nécessitent un alignement 16 octets
-2. **Performance** : Accès mémoire plus rapides
-3. **Obligations ABI** : Requis par la norme System V
+1. *Instructions SSE* : Nécessitent un alignement 16 octets
+2. *Performance* : Accès mémoire plus rapides
+3. *Obligations ABI* : Requis par la norme System V
 
 == 6.4 Comment assurer l'alignement
 
@@ -928,7 +928,7 @@ main:
     ret
 ", lang: "nasm"))
 
-**Points importants :**
+*Points importants :*
 1. `xor eax, eax` avant `call printf` : indique le nombre d'arguments flottants (0 ici)
 2. Utiliser `lea rdi, [rel format]` pour code position-independent
 3. Toujours assurer l'alignement 16 octets avant CALL
@@ -938,7 +938,7 @@ main:
 Pour appeler des fonctions comme `printf` :
 
 #codebox(raw("
-    ; printf('%s %d %f\n', str, num, float)
+    ;printf('%s %d %f\\n',str, num, float)
     lea rdi, [rel format]     ; Format string
     lea rsi, [rel str]        ; 1er arg
     mov rdx, 42               ; 2ème arg (entier)
@@ -975,7 +975,7 @@ _start:
     syscall
 ", lang: "nasm"))
 
-**Compilation et exécution :**
+*Compilation et exécution :*
 ```bash
 nasm -f elf64 hello.asm -o hello.o
 ld hello.o -o hello
@@ -1367,7 +1367,7 @@ mov rax, 0xFFFFFFFFFFFFFFFF
 mov eax, 1                    ; rax = 0x0000000000000001 (zéro-extension!)
 ", lang: "nasm"))
 
-**Règle :** Les opérations 32 bits mettent à zéro les 32 bits hauts.
+*Règle :* Les opérations 32 bits mettent à zéro les 32 bits hauts.
 
 === Piège 4 : Division sans initialiser RDX
 
@@ -1448,7 +1448,7 @@ projet/
     └── (fichiers objets)
 ```
 
-**Makefile exemple :**
+*Makefile exemple :*
 
 ```makefile
 ASM = nasm
@@ -1618,14 +1618,14 @@ add rax, rbx                  ; Pipeline bloqué
 
 Ce tutoriel couvre les aspects essentiels de l'assembleur x86-64 avec syntaxe Intel :
 
-**Points clés à retenir :**
-1. **Alignement de pile** : Toujours 16 octets avant CALL
-2. **ABI** : Respecter les conventions (arguments, registres préservés)
-3. **Registres** : Connaître la différence entre préservés et volatiles
-4. **Performance** : Minimiser les accès mémoire, utiliser LEA intelligemment
-5. **Débogage** : Utiliser GDB et commenter abondamment
+*Points clés à retenir :*
+1. *Alignement de pile* : Toujours 16 octets avant CALL
+2. *ABI* : Respecter les conventions (arguments, registres préservés)
+3. *Registres* : Connaître la différence entre préservés et volatiles
+4. *Performance* : Minimiser les accès mémoire, utiliser LEA intelligemment
+5. *Débogage* : Utiliser GDB et commenter abondamment
 
-**Pour aller plus loin :**
+*Pour aller plus loin :*
 - Manuel Intel (Intel® 64 and IA-32 Architectures Software Developer's Manuals)
 - System V ABI documentation
 - Optimization manuals (Intel, AMD, Agner Fog)

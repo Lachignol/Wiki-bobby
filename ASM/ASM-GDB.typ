@@ -53,6 +53,11 @@ Avec ces options, GDB pourra afficher le code source avec des symboles et lignes
 \
 \
 
+= Il existe un plugin Gdb pour avoir un affichage interactif complet (stack registre et code): 
+
+- Aller sur https://github.com/hugsy/gef et telecharger
+
+
 == 3. Lancer GDB et configurer l’affichage split
 
 Pour déboguer l'exécutable :

@@ -1,0 +1,50 @@
+# Copiez dans ~/.gitconfig
+
+[user]
+    name = La chignol
+    email = ton.email@example.com
+
+[core]
+    editor = vim
+
+[merge]
+    tool = vim
+    conflictstyle = merge
+
+[mergetool]
+    prompt = false
+    keepBackup = false
+    trustExitCode = false
+
+[mergetool "vim"]
+    cmd = vim -d $LOCAL $MERGED $REMOTE 
+
+[diff]
+    tool = vim
+
+[difftool]
+    prompt = false
+
+[difftool "vim"]
+    cmd = vim -d $LOCAL $REMOTE
+
+[pull]
+    ; rebase = true
+
+[push]
+    default = current
+	; autoSetupRemote = true
+
+[branch]
+    autosetuprebase = always
+
+[color]
+    ui = auto
+[format]
+	; pretty=oneline
+
+[init]
+    defaultBranch = main
+
+[rerere]
+    enabled = true

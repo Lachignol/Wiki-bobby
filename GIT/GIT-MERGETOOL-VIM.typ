@@ -208,3 +208,5 @@ $ git commit
 - Dans MERGED : 1=LOCAL gauche, 2=REMOTE droite
 - `]`c/`[`c navigue conflits
 - :w :qa termine
+
+

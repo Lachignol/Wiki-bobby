@@ -53,7 +53,7 @@ L'architecture x86-64 (aussi appelée AMD64 ou Intel 64) est une extension 64 bi
 - *Plus de registres* : 16 registres généraux au lieu de 8
 - *Mode long* : Mode natif 64 bits
 
-== 1.2 Format ELF64
+== 1.2 Format ELF64 
 
 Le format ELF (Executable and Linkable Format) est le format standard sous Linux pour :
 - Exécutables

@@ -1,10 +1,17 @@
+#set page(
+  paper: "a4",
+  margin: (x: 2cm, y: 2cm),
+  numbering: "1"
+)
 = Debugging d'un programme ASM ELF64 avec GDB (Syntaxe Intel)
-\
+
+#linebreak()
 == Introduction
 Ce tutoriel explique comment créer, compiler et déboguer un programme *ASM ELF64* avec *GDB*, en utilisant la *syntaxe Intel*. 
 Nous allons utiliser `nasm` pour l'assemblage et `ld` pour l'édition de liens.
 
-\
+#linebreak()
+
 == 1. Préparer un fichier ASM simple
 
 Créons un fichier `hello.asm` :
@@ -28,7 +35,7 @@ _start:
     xor rdi, rdi      ; code de retour 0
     syscall
 ```
-\
+#linebreak()
 == 2. Compiler et lier
 
 Pour assembler et lier le programme, on utilise nasm et ld :
@@ -47,18 +54,13 @@ ld hello.o -o prog
 
 Avec ces options, GDB pourra afficher le code source avec des symboles et lignes, pas seulement les adresses.
 
-\
-\
-\
-\
-\
-
-= Il existe un plugin Gdb pour avoir un affichage interactif complet (stack registre et code): 
-
-- Aller sur https://github.com/hugsy/gef et telecharger
-
+#pagebreak()
 
 == 3. Lancer GDB et configurer l’affichage split
+#linebreak()
+*Il existe un plugin Gdb pour avoir un affichage interactif complet (stack registre et code):*
+
+- Aller sur https://github.com/hugsy/gef et telecharger
 
 Pour déboguer l'exécutable :
 
@@ -114,13 +116,8 @@ RBX            0x0 0
 (gdb) x/5i `$rip`
 ")
 
-
 Tu peux répéter stepi pour exécuter instruction par instruction et observer l'effet sur les registres.
-\
-\
-\
-\
-\
+#pagebreak()
 
 == 5. Exemple de session GDB avec display et layout
 #raw("

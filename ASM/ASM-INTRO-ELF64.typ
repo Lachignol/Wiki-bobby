@@ -1,4 +1,3 @@
-// --- Configuration du document ---
 #set page(
   paper: "a4",
   margin: (x: 2cm, y: 2cm),

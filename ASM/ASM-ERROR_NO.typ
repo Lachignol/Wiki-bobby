@@ -1,9 +1,11 @@
-= Fonctionement des erreurs
+#set page(
+  paper: "a4",
+  margin: (x: 2cm, y: 2cm),
+  numbering: "1"
+)
+= Fonctionement des errno in linux
 
-\
-\
-\
-
+#linebreak()
 
 ```asm
 

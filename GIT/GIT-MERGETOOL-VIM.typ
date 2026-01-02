@@ -32,16 +32,16 @@ L’objectif est que `git/.gitconfig` soit symlinké en `~/.gitconfig`.
 Colle cet exemple dans `git/.gitconfig` de ton repo de dotfiles, puis adapte les commentaires / options comme tu veux. 
 
 ```bash
-#==========================  Identité  ==========================#
+# Identité #
 [user]
     name = Ton Nom                # Ton nom d'auteur dans les commits
     email = ton.email@example.com # Ton email
 
-# ========================== # Éditeur & pager # ==========================
+# Éditeur & pager # 
 [core]
     editor = vim                   # Utiliser Neovim comme éditeur
 
-# ========================== # Merge & mergetool (Neovim) # ==========================
+# Merge & mergetool (Neovim) # 
 [merge]
     tool = vim                 # Utiliser Neovim (nvimdiff) comme mergetool
     conflictstyle = merge           # Montre aussi BASE dans les conflits (optionnel)
@@ -62,7 +62,7 @@ Colle cet exemple dans `git/.gitconfig` de ton repo de dotfiles, puis adapte les
     # [mergetool "diffview"]
     # cmd = nvim -n -c "DiffviewOpen" "$MERGED"
 
-# ========================== # Difftool (optionnel, aussi en vi) # ==========================
+# Difftool (optionnel, aussi en vi) # 
 [diff]
     tool = vim                 # Utiliser vim comme difftool
 
@@ -72,7 +72,7 @@ Colle cet exemple dans `git/.gitconfig` de ton repo de dotfiles, puis adapte les
 [difftool "vim"]
     cmd = vim -d $LOCAL $REMOTE
 
-# ========================== # Pull / Fetch / Push # ==========================
+# Pull / Fetch / Push # 
 [pull]
     # rebase = true                # Faire un rebase plutôt qu'un merge sur git pull
 
@@ -80,25 +80,25 @@ Colle cet exemple dans `git/.gitconfig` de ton repo de dotfiles, puis adapte les
     default = current               # Pousser seulement la branche courante
     autoSetupRemote = true          # Créer le remote tracking à la première poussée
 
-# ========================== # Branches # ==========================
+#  Branches # 
 [branch]
     autosetuprebase = always        # Toujours rebase pour les nouvelles branches
 
-# ========================== # Log & couleur # ==========================
+# Log & couleur # 
 [color]
     ui = auto                       # Couleurs auto dans Git
 
 [format]
     # pretty = oneline              # Formattage par défaut des logs
 
-# ========================== # GPG / signature (optionnel) # ==========================
+#  GPG / signature (optionnel) # 
 [commit]
     # gpgsign = true               # Signer tous les commits
 
 [tag]
     # gpgsign = true               # Signer tous les tags
 
-# ========================== # Divers # ==========================
+#  Divers # 
 [init]
     # defaultBranch = main           # Nom par défaut de la branche initiale
 

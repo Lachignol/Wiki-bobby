@@ -756,6 +756,23 @@ vim:tw=78:ts=8:ft=help:norl:
 
 ```
 
+*Afin de cree le help*
+
+Dans Neovim, tapez la commande :
+
+```sh
+
+:helptags chemin/du_dossier_ou_il_y_a_le_fichier.txt
+
+```
+Ici par exemple
+
+```sh
+
+:helptags doc/
+
+```
+
 
 
 *Explication* :
@@ -765,6 +782,8 @@ vim:tw=78:ts=8:ft=help:norl:
 - Les `*tags*` permettent la navigation avec `:h hello`
 
 - Structure standard : Introduction, Installation, Configuration, etc.
+
+Appuyez sur Entrée. Cela génère le fichier doc/tags indispensable pour :help test-plugin.
 
 
 
